@@ -17,6 +17,12 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.Miholder> {
    private ArrayList<Llamada> lista_llamadas;
    private Context c;
    private int resource;
+   public MiAdaptador(Context c,int r)
+   {
+       this.lista_llamadas=null;
+       this.c=c;
+       this.resource=r;
+   }
 
     public MiAdaptador(ArrayList<Llamada> llamadas,Context c,int r) {
         this.lista_llamadas=llamadas;
@@ -62,6 +68,7 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.Miholder> {
 
     public void setLista_llamadas(ArrayList<Llamada> lista_llamadas) {
         this.lista_llamadas = lista_llamadas;
+        notifyDataSetChanged();
     }
 
     public class Miholder extends RecyclerView.ViewHolder{

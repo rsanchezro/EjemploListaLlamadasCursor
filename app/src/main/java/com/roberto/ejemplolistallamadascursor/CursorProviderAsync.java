@@ -18,10 +18,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class CursorProviderAsync {
-    private MutableLiveData<ArrayList<Llamada>> listallamadas;
+    private static MutableLiveData<ArrayList<Llamada>> listallamadas;
     private final String[] campos = {CallLog.Calls.CACHED_PHOTO_URI, CallLog.Calls.CACHED_NAME, CallLog.Calls.DATE, CallLog.Calls.NUMBER, CallLog.Calls.DURATION};
     private Context c;
+    public MutableLiveData<ArrayList<Llamada>> obtenerllamadas()
+    {
+        if(listallamadas==null)
+        {
+            listallamadas=new MutableLiveData<ArrayList<Llamada>>();
+        }
+        return listallamadas;
 
+    }
     //Defino un metodo para que las tareas sean asincronas
     public void cargarListaLlamadasAsinc(int tipollamada) {
         if (listallamadas == null) {
@@ -37,7 +45,7 @@ public class CursorProviderAsync {
         }
         CursorProviderAsync.MimanejadorConsultas mimanejadorConsultas=new CursorProviderAsync.MimanejadorConsultas(c.getContentResolver());
         mimanejadorConsultas.startQuery(1,null,CallLog.Calls.CONTENT_URI, campos, "type=?", filtro, "date desc");
-
+        Log.i("Informacion","que pasa");
     }
 
 

@@ -9,19 +9,22 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
 public class LlamadaViewModel extends ViewModel {
-    private MutableLiveData<ArrayList<Llamada>> listallamadas;
-    private CursorProvider micursor;
+    private static MutableLiveData<ArrayList<Llamada>> listallamadas;
+    private CursorProviderAsync micursor;
 
-    public LlamadaViewModel(Context c,int tipollamada) {
-        if (micursor == null) {
-            micursor = new CursorProviderAsync(c);
-            //Obtenemos la lista de llamadas
-            this.listallamadas=micursor.cargarListaLlamadasAsinc(tipollamada);
-        }
-        if (listallamadas == null) {
-                //Cargar la lista de llamadas
 
-        }
+
+    public void cargarListaLlamadas(Context c,int tipollamada)
+    { if ((micursor == null)){
+        micursor = new CursorProviderAsync(c);
+        //Obtenemos la lista de llamadas
+
+        //Cargo la lista de llamadas
+
+    }
+        listallamadas=micursor.obtenerllamadas();
+        micursor.cargarListaLlamadasAsinc(tipollamada);
+
     }
         public MutableLiveData<ArrayList<Llamada>> obtenerLlamadas()
         {
@@ -34,4 +37,4 @@ public class LlamadaViewModel extends ViewModel {
         }
 
     }
-}
+
